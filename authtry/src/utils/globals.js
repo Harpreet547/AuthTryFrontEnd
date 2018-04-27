@@ -1,0 +1,7 @@
+
+
+var GlobalObjects = {
+    loggedInUser: {
+        
+    }
+}

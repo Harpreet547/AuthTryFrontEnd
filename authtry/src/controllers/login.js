@@ -1,26 +1,20 @@
-import React, { Component } from 'react';
+import NetworkManager from '../managers/networkManager';
 
 class LoginController {
 
-    login() {
+    login(email, password) {
         var data = new FormData();
         var loginData = {
             email: 'abc@gmail.com',
             password: 'abc'
         }
-        data.append('', JSON.stringify(loginData));
-        fetch('http://localhost:8282/user/login', {
-            method: 'POST',
-            body: JSON.stringify(loginData),
-            headers: {'Content-Type': 'application/json'},
-        }).then(response => response.json(), error => {
-            console.log('ERROR IN FETCH LOGIN: ' + error)
-        }).then(res => {
-            console.log('Response: ' + JSON.stringify(res));
-            var result
-            if(res.err != null) {
-                console.log('no error');
-            }
+
+        var networkManager = new NetworkManager();
+        networkManager.performPostRequest('http://localhost:8282/user/login', loginData, (error, res) => {
+            console.log('LOGIN REQUEST: Error: ' + JSON.stringify(error) + ' Response: ' + JSON.stringify(res));
         });
+
     }
 }
+
+export default LoginController;

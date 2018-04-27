@@ -7,18 +7,8 @@ import FlatButton from 'material-ui/FlatButton';
 
 import loginStyle from '../styles/login';
 import appConstants from '../utils/appConstants';
-/*
-headers: {
-                "application/json": "Content-Type",
-                "application/json": "Accept"
-                /*
-                'Content-Type':'application/x-www-form-urlencoded',
-                "Access-Control-Allow-Origin": "*",
-                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-type,Accept,X-Access-Token,X-Key'
-                */
-           /* },
-*/
+import LoginController from '../controllers/login';
+
 class Login extends Component {
 
     constructor(props) {
@@ -27,25 +17,8 @@ class Login extends Component {
     }
 
     onLoginTap() {
-        var data = new FormData();
-        var loginData = {
-            email: 'abc@gmail.com',
-            password: 'abc'
-        }
-        data.append('', JSON.stringify(loginData));
-        fetch('http://localhost:8282/user/login', {
-            method: 'POST',
-            body: JSON.stringify(loginData),
-            headers: {'Content-Type': 'application/json'},
-        }).then(response => response.json(), error => {
-            console.log('ERROR IN FETCH LOGIN: ' + error)
-        }).then(res => {
-            console.log('Response: ' + JSON.stringify(res));
-            if(res.err != null) {
-                
-            }
-        });
-        
+        var loginController = new LoginController();
+        loginController.login('abc@gmail.com', 'abc');
     }
 
     render() {
