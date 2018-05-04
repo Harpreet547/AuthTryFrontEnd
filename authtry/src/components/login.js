@@ -13,12 +13,18 @@ class Login extends Component {
 
     constructor(props) {
         super(props);
-        
+        console.log('Login Props: ' + JSON.stringify(this.props))
     }
 
     onLoginTap() {
+        var email = document.getElementById('textFieldUsername').value;
+        var password = document.getElementById('textFieldPassword').value;
+        var loginData = {
+            email: email,
+            password: password
+        }
         var loginController = new LoginController();
-        loginController.login('abc@gmail.com', 'abc');
+        loginController.login(loginData);
     }
 
     render() {
