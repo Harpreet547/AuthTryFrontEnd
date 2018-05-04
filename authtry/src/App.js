@@ -9,7 +9,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Header from './components/header';
 import Login from './components/login';
 import SignUp from './components/signUp';
-
+import Home from './components/Home';
 import appStyle from './styles/app';
 
 import historyManager from './managers/historyManger';
@@ -31,6 +31,7 @@ class App extends Component {
           <div className='content' style={ appStyle.content }>
             <Route exact path='/login' component={ Login }/>
             <Route path='/signUp' component={ SignUp }/>
+            <Route path='/home' component={ Home }/>
           </div>
         </div>
       </MuiThemeProvider>

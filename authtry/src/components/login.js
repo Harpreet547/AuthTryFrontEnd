@@ -9,11 +9,21 @@ import loginStyle from '../styles/login';
 import appConstants from '../utils/appConstants';
 import LoginController from '../controllers/login';
 
+import historyManager from '../managers/historyManger';
+import GlobalObjects from '../utils/globals';
+import utils from '../utils/utils';
+import Utils from '../utils/utils';
+
 class Login extends Component {
 
     constructor(props) {
         super(props);
         console.log('Login Props: ' + JSON.stringify(this.props))
+        this.onLoginTap = this.onLoginTap.bind(this);
+        console.log('Logged In User: ' + JSON.stringify(GlobalObjects.loggedInUser));
+        if(GlobalObjects.loggedInUser !== undefined && !Utils.objIsEmpty(GlobalObjects.loggedInUser)) {
+            historyManager.pushRoute('/home', this.props);
+        }
     }
 
     onLoginTap() {
@@ -24,7 +34,14 @@ class Login extends Component {
             password: password
         }
         var loginController = new LoginController();
-        loginController.login(loginData);
+        loginController.login(loginData, (error, res) => {
+            console.log('LOGIN REQUEST: Error: ' + JSON.stringify(error) + ' Response: ' + JSON.stringify(res));
+            if(error == null) {
+                historyManager.pushRoute('/home', this.props);
+                GlobalObjects.loggedInUser = res.user;
+                console.log('Logged In User: ' + JSON.stringify(GlobalObjects.loggedInUser));
+            }
+        });
     }
 
     render() {

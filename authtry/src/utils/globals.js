@@ -5,3 +5,5 @@ var GlobalObjects = {
         
     }
 }
+
+export default GlobalObjects;
